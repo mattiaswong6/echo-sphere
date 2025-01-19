@@ -6,11 +6,10 @@ import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 export default function Broadcast() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const clientRef = useRef(null);
-   // const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
+  //  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
   const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
 
   useEffect(() => {
-    if (typeof window === "undefined") return; // Ensure code only runs on the client
 
     async function helper() {
       const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
