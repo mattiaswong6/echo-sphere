@@ -1,106 +1,47 @@
-"use client"
+"use client";
+import { useEffect, useRef } from "react";
+import { Client, Constraints, LocalStream, RemoteStream } from "ion-sdk-js";
+import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 
-import Header from "../components/Header";
-import NavBar from "../components/NavBar";
-import {Routes, BrowserRouter as Router, Route} from 'react-router-dom'
-import { useState } from 'react';
-import UserItem from './user-item';
-import {
-  DndContext,
-  DragEndEvent,
-  KeyboardSensor,
-  PointerSensor,
-  closestCenter,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
-import {
-  SortableContext,
-  arrayMove,
-  sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import { IconType } from 'react-icons';
-import * as fa from "react-icons/fa";
-type User = {
-  id: number;
-  name: string;
-  icon: any;
-};
-const dummyData: User[] = [
-  {
-    id: 1,
-    name: '[A Night to remember - Laufey & Beabadoobe]',
-    icon: <fa.FaMusic/>,
-  },
-  {
-    id: 2,
-    name: '[Tweak - GELO]',
-    icon: <fa.FaMusic/>,
-  },
-  {
-    id: 3,
-    name: 'Live Mic',
-    icon: <fa.FaMicrophone/>,
-  },
-];
+export default function Broadcast() {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const clientRef = useRef(null);
+   // const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
+  const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
 
-const UserList = () => {
-  const [userList, setUserList] = useState<User[]>(dummyData);
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
+  useEffect(() => {
+    if (typeof window === "undefined") return; // Ensure code only runs on the client
 
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
+    async function helper() {
+      const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
+      const client = new Client(signal);
+      signal.onopen = () => client.join("ion", "random uid");
 
-    if (over && active.id !== over.id) {
-      setUserList((items) => {
-        const oldIndex = items.findIndex((item) => item.id === active.id);
-        const newIndex = items.findIndex((item) => item.id === over.id);
+      const local = await LocalStream.getUserMedia({
+        audio: true,
+        video: false,
+        simulcast: true,
+      } as Constraints);
 
-        return arrayMove(items, oldIndex, newIndex);
-      });
+      if (audioRef.current) {
+        audioRef.current.srcObject = local;
+        audioRef.current.muted = true;
+      }
+      client.publish(local);
     }
-  }
-  console.log(userList);
 
+    helper();
+  }, []);
   return (
-    <div className="grid grid-cols-6">
-      <div className="col-span-6">
-        <Header/>
-      </div>
-      <div>
-        <Router>
-          <NavBar/>
-          <Routes>
-          </Routes>
-        </Router>
-      </div>
-      <div className='max-w-2xl h-10 grid gap-2 my-10 col-start-2 col-span-2 ml-20'>
-        <h2 className='text-2xl font-bold mb-4'>Queue</h2>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-          modifiers={[restrictToVerticalAxis]}
-        >
-          <SortableContext
-            items={userList}
-            strategy={verticalListSortingStrategy}
-          >
-            {userList.map((user, index) => (
-              <UserItem key={user.id} user={user} />
-            ))}
-          </SortableContext>
-        </DndContext>
-      </div>
+    <div className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-md w-80">
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">
+        Audio Player
+      </h2>
+      <audio ref={audioRef} muted={false}/>
+      <button
+        className={`mt-4 px-4 py-2 rounded-full text-white transition bg-green-500 hover:bg-green-600`}>
+          {"play"}
+      </button>
     </div>
-)};
-
-export default UserList;
-
+  );
+}
