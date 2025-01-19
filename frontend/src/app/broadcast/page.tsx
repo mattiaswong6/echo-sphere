@@ -23,6 +23,7 @@ import {
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { IconType } from 'react-icons';
 import * as fa from "react-icons/fa";
+import LiveChat from "../components/LiveChat";
 type User = {
   id: number;
   name: string;
@@ -98,6 +99,9 @@ const UserList = () => {
             ))}
           </SortableContext>
         </DndContext>
+      </div>
+      <div className="col-start-4 col-span-3 h-100">
+        <LiveChat/>
       </div>
     </div>
 )};
