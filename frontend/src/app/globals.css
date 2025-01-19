@@ -19,3 +19,18 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Tag styles */
+
+.music {
+  background-color: aquamarine;
+}
+
+.lgbtq {
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+  color: white;
+}
+
+.podcast {
+  background-color: goldenrod;
+}
