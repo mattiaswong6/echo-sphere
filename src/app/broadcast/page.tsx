@@ -22,7 +22,8 @@ import {
 } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import * as fa from "react-icons/fa";
-import Chat from "../chat";
+import ChatWindow from "../ChatWindow";
+import Broadcast from "../broadtest/page";
 type User = {
   id: number;
   name: string;
@@ -72,18 +73,21 @@ const UserList = () => {
   console.log(userList);
 
   return (
-    <div className="grid grid-cols-[2fr 4fr 4fr] p-4">
+    <div className="grid grid-cols-[2fr 4fr 4fr] grid-rows-[0.5fr 1fr 1fr] p-4">
       <div className="col-span-3">
         <Header/>
       </div>
-      <div>
+      <div className="">
         <Router>
           <NavBar/>
           <Routes>
           </Routes>
         </Router>
       </div>
-      <div className='max-w-2xl h-10 grid gap-2 my-10 col-start-2 col-span-1 ml-20'>
+      <div>
+
+      </div>
+      <div className='max-w-2xl h-10 grid gap-2 my-10 col-start-2 col-span-1 row-start-3 ml-20'>
         <h2 className='text-2xl font-bold mb-4'>Queue</h2>
         <DndContext
           sensors={sensors}
@@ -101,7 +105,9 @@ const UserList = () => {
           </SortableContext>
         </DndContext>
       </div>
-      <Chat />
+      <div className="col-start-2 col-span-2 row-start-2">
+        <Broadcast name={"streamer"} />
+      </div>
     </div>
 )};
 

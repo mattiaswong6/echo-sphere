@@ -1,101 +1,98 @@
-"use client";
-import { useEffect, useRef, useState } from "react";
-import { Client, RemoteStream } from "ion-sdk-js";
-import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
-import { v4 as uuidv4 } from "uuid";
-import { Configuration } from "ion-sdk-js/lib/client";
+"use client"
 
-export default function View() {
-  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
-  // const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [messages, setMessages] = useState<string[]>([]);
-  const [message, setMessage] = useState("");
-  const dataChannelRef = useRef<RTCDataChannel | null>(null);
+import Header from "../Header";
+import NavBar from "../NavBar";
+import {Routes, BrowserRouter as Router} from 'react-router-dom'
+import { useState } from 'react';
+import UserItem from '../broadcast/user-item';
+import {
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  SortableContext,
+  arrayMove,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
+import * as fa from "react-icons/fa";
+import ChatWindow from "../ChatWindow";
+import Broadcast from "../broadtest/page";
+import View from "../listentest/page";
+type User = {
+  id: number;
+  name: string;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
+  icon: any;
+};
+const dummyData: User[] = [
+  {
+    id: 1,
+    name: '[A Night to remember - Laufey & Beabadoobe]',
+    icon: <fa.FaMusic/>,
+  },
+  {
+    id: 2,
+    name: '[Tweak - GELO]',
+    icon: <fa.FaMusic/>,
+  },
+  {
+    id: 3,
+    name: 'Live Mic',
+    icon: <fa.FaMicrophone/>,
+  },
+];
 
-  useEffect(() => {
-    const startViewing = async () => {
-      const config = {
-        iceServers: [
-          {
-            urls: "stun:stun.l.google.com:19302",
-          },
-        ],
-      };
-      const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
-      const client = new Client(signal, config as Configuration);
-      signal.onopen = () => client.join("ion", uuidv4());
 
-      client.ondatachannel = (channelEvent) => {
-        channelEvent.channel.onmessage = (event) => {
-          setMessages((prev) => [...prev, event.data]);
-        };
-        dataChannelRef.current = channelEvent.channel;
+const UserList = () => {
+  const [userList, setUserList] = useState<User[]>(dummyData);
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
-        channelEvent.channel.onopen = () => console.log("Data channel open");
-        channelEvent.channel.onclose = () => console.log("Data channel closed");
-      };
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
 
-      client.ontrack = (track: MediaStreamTrack, stream: RemoteStream) => {
-        if (audioRef.current) {
-          audioRef.current.srcObject = stream;
-          audioRef.current.autoplay = true;
-          audioRef.current.muted = false;
-        }
-      };
-    };
+    if (over && active.id !== over.id) {
+      setUserList((items) => {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
 
-    startViewing();
-  }, []);
-
-  const sendMessage = () => {
-    if (dataChannelRef.current && message.trim()) {
-      dataChannelRef.current.send(`chatter: ${message}`);
-      setMessages((prev) => [...prev, `You: ${message}`]);
-      setMessage("");
+        return arrayMove(items, oldIndex, newIndex);
+      });
     }
-  };
+  }
+  console.log(userList);
 
   return (
-    <div>
-      <div className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-md w-80">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Audio Player
-        </h2>
-        <audio ref={audioRef} muted={false} />
-        <button
-          className={`mt-4 px-4 py-2 rounded-full text-white transition bg-green-500 hover:bg-green-600`}
-        >
-          {"play"}
-        </button>
+    <div className="grid grid-cols-[2fr 4fr 4fr] grid-rows-[0.5fr 1fr 1fr] p-4">
+      <div className="col-span-3">
+        <Header/>
       </div>
-
+      <div className="">
+        <Router>
+          <NavBar/>
+          <Routes>
+          </Routes>
+        </Router>
+      </div>
       <div>
-        <div>
-          <h1>chat</h1>
-          <div
-            style={{
-              height: "300px",
-              overflowY: "scroll",
-              border: "1px solid #ccc",
-              marginBottom: "10px",
-              padding: "10px",
-            }}
-          >
-            {messages.map((msg, idx) => (
-              <div key={idx}>{msg}</div>
-            ))}
-          </div>
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Type a message"
-            style={{ width: "calc(100% - 60px)", marginRight: "10px" }}
-          />
-          <button onClick={sendMessage}>Send</button>
-        </div>
+
+      </div>
+      <div className="col-start-2 col-span-2 row-start-2">
+        <View name={"viewer"} />
       </div>
     </div>
-  );
-}
+)};
+
+export default UserList;
+
