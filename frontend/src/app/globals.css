@@ -8,6 +8,10 @@
   font-family: "Albert Sans", serif;
 }
 
+h1{
+  color:#79C2CD;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -26,3 +30,95 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* COMPONENTS */
+
+/* StreamCard.tsx */
+
+.stream-card-container {
+  height: 500px;
+  width: 340px;
+  flex-direction: column;
+}
+
+.album-cover {
+  width: 100%;
+  height: 340px;
+}
+
+.sc-creatorline {
+  width: 100%;
+  height: 10%;
+}
+
+.sc-creatorline img {
+  height: 80%;
+  aspect-ratio: 1/1;
+}
+
+/* Tag.tsx */
+
+.tag:hover {
+  opacity: 80%;
+  margin-top: -5px;
+}
+
+.music {
+  background-color: aquamarine;
+  color: black;
+}
+
+.lgbtq {
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+  color: white;
+}
+
+.podcast {
+  background-color: goldenrod;
+  color: black;
+}
+
+.religion {
+  background-color: purple;
+  color: white;
+}
+
+.spiritual {
+  background-color: red;
+}
+
+.gaming {
+  background-color: #1F51FF;
+}
+
+.new-artist {
+  background-color: #ffa500;
+  color: black;
+}
+
+.popular {
+  background-color: #bd1816;
+}
+
+.r\&b {
+  background-color:lightcyan;
+  color:black;
+}
+
+.poc-artist {
+  background-color: beige;
+  color:black;
+}
+
+.education {
+  background-color:palegreen;
+  color: black;
+}
+
+.ubc {
+  background-color: #2975c6;
+}
+
+.mental-health {
+  background-color: pink;
+  color: black;
+}
