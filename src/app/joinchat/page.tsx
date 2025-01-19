@@ -1,22 +1,25 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { Client, RemoteStream } from "ion-sdk-js";
-import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
+import React, { useEffect, useRef, useState } from "react";
+import { initIonClient } from "../../../lib/ion";
 import { v4 as uuidv4 } from "uuid";
+import { Client } from "ion-sdk-js";
+import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 
-export default function View() {
-  // const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
-  const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
-  const audioRef = useRef<HTMLAudioElement>(null);
+const Chatroom: React.FC = () => {
+  const [room, setRoom] = useState("");
+  const [joined, setJoined] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
   const [message, setMessage] = useState("");
   const dataChannelRef = useRef<RTCDataChannel | null>(null);
 
+  //  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
+  const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
+
   useEffect(() => {
-    const startViewing = async () => {
+    if (joined) {
       const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
       const client = new Client(signal);
-      signal.onopen = () => client.join("ion", uuidv4());
+      signal.onopen = () => client.join(room, uuidv4());
 
       client.ondatachannel = (channelEvent) => {
         channelEvent.channel.onmessage = (event) => {
@@ -28,19 +31,17 @@ export default function View() {
         channelEvent.channel.onclose = () => console.log("Data channel closed");
       };
 
-      client.ontrack = (track: MediaStreamTrack, stream: RemoteStream) => {
-        if (audioRef.current) {
-          audioRef.current.srcObject = stream;
-          audioRef.current.autoplay = true;
-          audioRef.current.muted = false;
-        }
+      return () => {
+        client.close();
       };
+    }
+  }, [joined, room]);
 
-    };
-
-    startViewing();
-  }, []);
-
+  const joinRoom = () => {
+    if (room.trim()) {
+      setJoined(true);
+    }
+  };
 
   const sendMessage = () => {
     if (dataChannelRef.current && message.trim()) {
@@ -52,21 +53,20 @@ export default function View() {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-center p-4 bg-gray-100 rounded-lg shadow-md w-80">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">
-          Audio Player
-        </h2>
-        <audio ref={audioRef} muted={false} />
-        <button
-          className={`mt-4 px-4 py-2 rounded-full text-white transition bg-green-500 hover:bg-green-600`}
-        >
-          {"play"}
-        </button>
-      </div>
-
-      <div>
+      {!joined ? (
         <div>
-          <h1>chat</h1>
+          <h1>Join a Chatroom</h1>
+          <input
+            type="text"
+            placeholder="Room name"
+            value={room}
+            onChange={(e) => setRoom(e.target.value)}
+          />
+          <button onClick={joinRoom}>Join</button>
+        </div>
+      ) : (
+        <div>
+          <h1>Room: {room}</h1>
           <div
             style={{
               height: "300px",
@@ -81,6 +81,7 @@ export default function View() {
             ))}
           </div>
           <input
+            className="text-black"
             type="text"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -89,7 +90,9 @@ export default function View() {
           />
           <button onClick={sendMessage}>Send</button>
         </div>
-      </div>
+      )}
     </div>
   );
-}
+};
+
+export default Chatroom;
