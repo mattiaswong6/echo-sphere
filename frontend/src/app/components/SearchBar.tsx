@@ -22,7 +22,7 @@ export default function SearchBar() {
             value={searchQuery}
             onChange={handleInputChange}
             placeholder="Search"
-            className="mr-3"
+            className="mr-3 w-full outline-none"
           />
     </div>
   )
