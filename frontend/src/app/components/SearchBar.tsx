@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from "react";
+import { IoSearchSharp } from "react-icons/io5";
 
 export default function SearchBar() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -14,13 +15,14 @@ export default function SearchBar() {
     //   };
 
   return (
-    <div>
+    <div className="flex w-96 space-x-2 px-5 py-2 border rounded-2xl shadow-sm bg-[#FFFFFF]">
+        <IoSearchSharp className="h-6"/>
         <input
             type="text"
             value={searchQuery}
             onChange={handleInputChange}
-            placeholder="Search..."
-            className="w-96 px-4 py-2 border rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            placeholder="Search"
+            className="mr-3"
           />
     </div>
   )
