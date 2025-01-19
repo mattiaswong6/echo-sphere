@@ -1,22 +1,19 @@
+"use client"
+
 import Header from "./components/Header";
-import StreamCard from "./components/StreamCard";
+import NavBar from "./components/NavBar";
+import {Link, Routes, BrowserRouter as Router, Route} from 'react-router-dom'
 
 export default function Home() {
   return (
     <div>
       <Header/>
-      <main>
-        <StreamCard
-          streamName="Jazzy Pop"
-          streamCreator="Bobby Jr"
-          streamPfp="globe.svg"
-          streamCover="shroom-astronaught.jpg"
-          streamTags={["music", "lgbtq", "podcast", "music"]}
-        />
-      </main>
-      <footer>
-
-      </footer>
+      <Router>
+        <NavBar/>
+        <Routes>
+          <Route path='/'/>
+        </Routes>
+      </Router>
     </div>
   );
 }
