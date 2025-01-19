@@ -3,10 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { Client, RemoteStream } from "ion-sdk-js";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 import { v4 as uuidv4 } from "uuid";
+import { Configuration } from "ion-sdk-js/lib/client";
 
 export default function View() {
-  // const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
-  const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
+  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
+  // const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
   const audioRef = useRef<HTMLAudioElement>(null);
   const [messages, setMessages] = useState<string[]>([]);
   const [message, setMessage] = useState("");
@@ -14,8 +15,15 @@ export default function View() {
 
   useEffect(() => {
     const startViewing = async () => {
+      const config = {
+        iceServers: [
+          {
+            urls: "stun:stun.l.google.com:19302",
+          },
+        ],
+      };
       const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
-      const client = new Client(signal);
+      const client = new Client(signal, config as Configuration);
       signal.onopen = () => client.join("ion", uuidv4());
 
       client.ondatachannel = (channelEvent) => {
@@ -35,12 +43,10 @@ export default function View() {
           audioRef.current.muted = false;
         }
       };
-
     };
 
     startViewing();
   }, []);
-
 
   const sendMessage = () => {
     if (dataChannelRef.current && message.trim()) {

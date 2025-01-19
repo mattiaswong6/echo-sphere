@@ -22,6 +22,7 @@ import {
 } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import * as fa from "react-icons/fa";
+import Chat from "../chat";
 type User = {
   id: number;
   name: string;
@@ -45,6 +46,7 @@ const dummyData: User[] = [
     icon: <fa.FaMicrophone/>,
   },
 ];
+
 
 const UserList = () => {
   const [userList, setUserList] = useState<User[]>(dummyData);
@@ -70,8 +72,8 @@ const UserList = () => {
   console.log(userList);
 
   return (
-    <div className="grid grid-cols-6">
-      <div className="col-span-6">
+    <div className="grid grid-cols-[2fr 4fr 4fr] p-4">
+      <div className="col-span-3">
         <Header/>
       </div>
       <div>
@@ -81,7 +83,7 @@ const UserList = () => {
           </Routes>
         </Router>
       </div>
-      <div className='max-w-2xl h-10 grid gap-2 my-10 col-start-2 col-span-2 ml-20'>
+      <div className='max-w-2xl h-10 grid gap-2 my-10 col-start-2 col-span-1 ml-20'>
         <h2 className='text-2xl font-bold mb-4'>Queue</h2>
         <DndContext
           sensors={sensors}
@@ -99,6 +101,7 @@ const UserList = () => {
           </SortableContext>
         </DndContext>
       </div>
+      <Chat />
     </div>
 )};
 

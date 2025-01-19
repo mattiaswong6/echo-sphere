@@ -4,6 +4,7 @@ import { initIonClient } from "../../../lib/ion";
 import { v4 as uuidv4 } from "uuid";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 import { Client } from "ion-sdk-js";
+import { Configuration } from "ion-sdk-js/lib/client";
 
 const Chatroom: React.FC = () => {
   const [room, setRoom] = useState("");
@@ -16,8 +17,15 @@ const Chatroom: React.FC = () => {
 
   useEffect(() => {
     if (joined) {
+      const config = {
+        iceServers: [
+          {
+            urls: "stun:stun.l.google.com:19302",
+          },
+        ],
+      };
       const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
-      const client = new Client(signal);
+      const client = new Client(signal, config as Configuration);
       signal.onopen = () => {
         client.join(room, uuidv4());
 

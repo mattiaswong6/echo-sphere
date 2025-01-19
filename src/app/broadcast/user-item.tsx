@@ -30,7 +30,7 @@ const UserItem: FC<UserItemProps> = (props) => {
     >
       <div className= '!mr-2 text-[#202020]'>
         {icon}
-    <p className='text-sm font-semibold text-end'>{name}</p>
+    <p className='text-sm font-semibold text-center'>{name}</p>
         
       </div>
       {/* <button {...attributes} {...listeners} className='cursor-move'>

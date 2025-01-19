@@ -4,11 +4,12 @@ import { Client, Constraints, LocalStream } from "ion-sdk-js";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 import { v4 as uuidv4 } from 'uuid';
 import dynamic from "next/dynamic";
+import { Configuration } from "ion-sdk-js/lib/client";
 
 const Broadcast = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
-  //  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
-  const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
+  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
+  // const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
 
   const [joined, setJoined] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
@@ -17,8 +18,15 @@ const Broadcast = () => {
   const dataChannelRef = useRef<RTCDataChannel | null>(null);
   useEffect(() => {
     async function audioHelper() {
+    const config = {
+      iceServers: [
+        {
+          urls: "stun:stun.l.google.com:19302",
+        },
+      ],
+    };
       const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
-      const client = new Client(signal);
+      const client = new Client(signal, config as Configuration);
       signal.onopen = async () => {
         client.join("ion", uuidv4());
 
