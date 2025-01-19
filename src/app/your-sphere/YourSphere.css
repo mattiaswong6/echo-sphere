@@ -1,0 +1,23 @@
+.right-box {
+    border: solid 5px #fff;
+    border-radius: 30px;
+    height: 80vh;
+    width: 85%;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    padding-left: 8px;
+}
+
+.pop {
+    background-color: pink;
+    color: black;
+  }
+
+.tag-container Tag {
+    background-color: white;
+}

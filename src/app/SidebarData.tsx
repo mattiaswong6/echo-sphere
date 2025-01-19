@@ -29,7 +29,7 @@ export const SidebarData = [
     },
     {
         title: 'My Sphere',
-        path: '/mySphere',
+        path: '/your-sphere',
         icon: <RiNeteaseCloudMusicLine/>,
         cName: 'nav-text' + hoverBehavior + defaultStyling
     },

@@ -1,3 +1,5 @@
+import './your-sphere/YourSphere.css'
+
 interface TagType {
     tagType: string;
 }
