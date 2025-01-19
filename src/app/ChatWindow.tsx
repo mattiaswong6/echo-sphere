@@ -53,10 +53,11 @@ export default function ChatWindow({
       <div className="border-white border-2 border-r-4 min-h-96 max-w-56 rounded-2xl">
         {messages.map((message) => (
           <p key={uuidv4()}>
-            <strong className={`!text-[${message.color}]`}>{message.sender}:</strong> {message.text}
+            <strong className={`text-[${message.color}] !important`}>{message.sender}:</strong> {message.text}
           </p>
         ))}
       </div>
+      <br/>
       <input
         className="text-slate-600 max-w-56 rounded-2xl"
         type="text"

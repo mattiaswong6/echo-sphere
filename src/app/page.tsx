@@ -19,6 +19,7 @@ export default function Home() {
                 Listen Now
               </h1>
               <div className="flex flex-row flex-wrap justify-evenly w-full gap-y-8">
+                <a href="/listen">
                 <StreamCard
                   streamCover="user-assets/hand-reach.jpg"
                   streamName="Mind Matters (ep. 21)"
@@ -26,6 +27,8 @@ export default function Home() {
                   streamPfp="user-assets/colourful.jpg"
                   streamTags={["mental-health", "education"]}
                 />
+                </a>
+
                 <StreamCard
                   streamCover="user-assets/ubc-cube.jpg"
                   streamName="CPSC 213 Week 3 Discussion"
