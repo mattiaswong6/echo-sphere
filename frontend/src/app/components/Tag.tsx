@@ -4,7 +4,7 @@ interface TagType {
 
 export default function Tag(props:TagType) {
   return (
-    <div className={"rounded-2xl w-fit flex px-3 " + props.tagType}>
+    <div className={"tag rounded-3xl w-fit flex px-5 py-2 " + props.tagType}>
         <p>{props.tagType}</p>
     </div>
   )
