@@ -19,16 +19,18 @@
 
     <h3>Logs</h3>
     <div id="logs"></div>
-    <label> Show stream?</label>
-    <input id="showStream" type="checkbox" onchange="changeHandler()"/>
+      <button id="showStream"  onclick="changeHandler()">Show Stream</button>
+
   </body>
 
   <script>
+
     function changeHandler() {
-        start()
+        document.getElementById('showStream').remove()
+        start(true)
     }
 
-    function start() {
+    function start(streamer) {
 
     navigator.mediaDevices
       .getUserMedia({ video: false, audio: true })
@@ -56,7 +58,7 @@
           };
         };
 
-        if (document.getElementById("showStream").checked) {
+        if (streamer) {
           document.getElementById("localVideo").srcObject = stream;
           stream.getTracks().forEach((track) => pc.addTrack(track, stream));
         }
@@ -119,7 +121,7 @@
       })
       .catch(window.alert);
     }
-    start()
+    start(false)
   </script>
 
 </html>

@@ -25,7 +25,7 @@ import (
 
 // nolint
 var (
-	addr     = flag.String("addr", ":8080", "http service address")
+	addr     = flag.String("addr", ":8080", "https service address")
 	upgrader = websocket.Upgrader{
 		CheckOrigin: func(r *http.Request) bool { return true },
 	}
@@ -43,9 +43,7 @@ type websocketMessage struct {
 	Event string `json:"event"`
 	Data  string `json:"data"`
 }
-
-type peerConnectionState struct {
-	peerConnection *webrtc.PeerConnection
+type peerConnectionState struct { peerConnection *webrtc.PeerConnection
 	websocket      *threadSafeWriter
 }
 
@@ -68,7 +66,7 @@ func main() {
 
 	// index.html handler
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		if err = indexTemplate.Execute(w, "ws://"+r.Host+"/websocket"); err != nil {
+		if err = indexTemplate.Execute(w, "wss://"+r.Host+"/websocket"); err != nil {
 			log.Errorf("Failed to parse index template: %v", err)
 		}
 	})
@@ -81,9 +79,10 @@ func main() {
 	}()
 
 	// start HTTP server
-	if err = http.ListenAndServe(*addr, nil); err != nil { //nolint: gosec
-		log.Errorf("Failed to start http server: %v", err)
-	}
+   err = http.ListenAndServeTLS(*addr, "server.crt", "server.key", nil)
+    if err != nil {
+        log.Errorf("ListenAndServe: ", err)
+    }
 }
 
 // Add to list of tracks and fire renegotation for all PeerConnections
