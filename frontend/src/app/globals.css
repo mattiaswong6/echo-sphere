@@ -8,6 +8,10 @@
   font-family: "Albert Sans", serif;
 }
 
+h1{
+  color:#79C2CD;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -47,7 +51,8 @@ body {
 }
 
 .sc-creatorline img {
-  height: 80%
+  height: 80%;
+  aspect-ratio: 1/1;
 }
 
 /* Tag.tsx */
@@ -59,6 +64,7 @@ body {
 
 .music {
   background-color: aquamarine;
+  color: black;
 }
 
 .lgbtq {
@@ -68,4 +74,51 @@ body {
 
 .podcast {
   background-color: goldenrod;
+  color: black;
+}
+
+.religion {
+  background-color: purple;
+  color: white;
+}
+
+.spiritual {
+  background-color: red;
+}
+
+.gaming {
+  background-color: #1F51FF;
+}
+
+.new-artist {
+  background-color: #ffa500;
+  color: black;
+}
+
+.popular {
+  background-color: #bd1816;
+}
+
+.r\&b {
+  background-color:lightcyan;
+  color:black;
+}
+
+.poc-artist {
+  background-color: beige;
+  color:black;
+}
+
+.education {
+  background-color:palegreen;
+  color: black;
+}
+
+.ubc {
+  background-color: #2975c6;
+}
+
+.mental-health {
+  background-color: pink;
+  color: black;
 }

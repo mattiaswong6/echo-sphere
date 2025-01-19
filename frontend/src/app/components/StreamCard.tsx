@@ -32,7 +32,7 @@ export default function StreamCard(props:StreamCard) {
             <h2>{props.streamName}</h2>
         </div>
         <div className="sc-creatorline flex flex-row justify-start items-center pl-2">
-            <img src="/empty-profile.svg" alt="Creator Profile" className="creator-pfp"></img>
+            <img src={props.streamPfp} alt="Creator Profile" className="creator-pfp rounded-full"></img>
             <h2 className="pl-2">{props.streamCreator}</h2>
         </div>
         <div className="tags-container pt-1 flex flex-row">
