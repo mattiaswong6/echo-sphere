@@ -4,7 +4,6 @@ import { Client, RemoteStream } from "ion-sdk-js";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 
 export default function View() {
-  if (typeof window === "undefined") return; // Ensure code only runs on the client
   // const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
   const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
   const audioRef = useRef<HTMLAudioElement>(null);

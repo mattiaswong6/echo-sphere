@@ -1,6 +1,4 @@
 'use client'
-
-import { Component, JSX } from "react";
 import Tag from "./Tag";
 
 interface StreamCard {
@@ -17,7 +15,7 @@ export default function StreamCard(props:StreamCard) {
 
     const renderTags = () => {
         const arr = [];
-        for (var x = 0; x < props.streamTags.length; x++) {
+        for (let x = 0; x < props.streamTags.length; x++) {
             arr.push(<Tag tagType={props.streamTags[x]} key={x}/>);
         }
         return arr;

@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Navbar.css'
@@ -11,7 +11,7 @@ function NavBar() {
     <>
       <nav className='nav-menu'>
         <ul className = 'nav-menu-items'> 
-            {SidebarData.map((item: any, index: any) => {
+            {SidebarData.map((item, index) => {
               return(
                 <li key={index} className={item.cName + ' pt-2'}>
                   <Link to={item.path}>

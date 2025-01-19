@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { Client, Constraints, LocalStream, RemoteStream } from "ion-sdk-js";
+import { Client, Constraints, LocalStream} from "ion-sdk-js";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 
 export default function Broadcast() {
   const audioRef = useRef<HTMLAudioElement>(null);
-  const clientRef = useRef(null);
   //  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
   const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
 

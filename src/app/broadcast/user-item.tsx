@@ -6,6 +6,7 @@ interface UserItemProps {
   user: {
     id: number;
     name: string;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
     icon: any;
   };
 }

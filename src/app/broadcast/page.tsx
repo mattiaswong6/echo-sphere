@@ -2,7 +2,7 @@
 
 import Header from "../components/Header";
 import NavBar from "../components/NavBar";
-import {Routes, BrowserRouter as Router, Route} from 'react-router-dom'
+import {Routes, BrowserRouter as Router} from 'react-router-dom'
 import { useState } from 'react';
 import UserItem from './user-item';
 import {
@@ -21,11 +21,11 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
-import { IconType } from 'react-icons';
 import * as fa from "react-icons/fa";
 type User = {
   id: number;
   name: string;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   icon: any;
 };
 const dummyData: User[] = [
@@ -93,7 +93,7 @@ const UserList = () => {
             items={userList}
             strategy={verticalListSortingStrategy}
           >
-            {userList.map((user, index) => (
+            {userList.map((user) => (
               <UserItem key={user.id} user={user} />
             ))}
           </SortableContext>
