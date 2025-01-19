@@ -33,28 +33,34 @@ const dummyData: User[] = [
   {
     id: 1,
     name: '[A Night to remember - Laufey & Beabadoobe]',
-    icon: <fa.FaMusic/>,
+    icon: <fa.FaMusic className="absolute left-4"/>,
   },
   {
     id: 2,
     name: '[Tweak - GELO]',
-    icon: <fa.FaMusic/>,
+    icon: <fa.FaMusic className="absolute left-4"/>,
   },
   {
     id: 3,
     name: 'Live Mic',
-    icon: <fa.FaMicrophone/>,
+    icon: <fa.FaMicrophone className="absolute left-4"/>,
   },
 ];
 
 const UserList = () => {
   const [userList, setUserList] = useState<User[]>(dummyData);
+  const [broadcastStatus, setStatus] = useState<boolean>(false);
+
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   );
+
+  function handleBroadcastChange(){
+    setStatus(!broadcastStatus);
+  }
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -99,6 +105,7 @@ const UserList = () => {
             ))}
           </SortableContext>
         </DndContext>
+          <button onClick={handleBroadcastChange}>{broadcastStatus ? "Start Broadcast" : "End Broadcast"}</button>
       </div>
       <div className="col-start-4 col-span-3 h-100">
         <LiveChat/>

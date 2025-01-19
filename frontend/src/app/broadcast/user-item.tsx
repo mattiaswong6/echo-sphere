@@ -25,16 +25,12 @@ const UserItem: FC<UserItemProps> = (props) => {
       style={style}
       {...attributes}
       {...listeners}
-      className='bg-[#D9D9D9] p-1 h-10 rounded-full shadow-md items-center'
+      className='relative bg-[#D9D9D9] space-x-10 flex p-2 h-10 rounded-full shadow-md items-center justify-center'
     >
-      <div className= '!mr-2 text-[#202020]'>
+      <div className= 'flex min-w-250 space-x-10 text-[#202020]'>
         {icon}
-    <p className='text-sm font-semibold text-end'>{name}</p>
-        
+        <p className='text-sm font-semibold text-end'>{name}</p>
       </div>
-      {/* <button {...attributes} {...listeners} className='cursor-move'>
-        Drag
-      </button> */}
     </div>
   );
 };
