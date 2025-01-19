@@ -10,7 +10,9 @@ import StreamCard from "./components/StreamCard";
 export default function Home() {
   return (
     <div>
-      <Header/>
+      <div className="flex justify-center">
+        <Header/>
+      </div>
       <Router>
         <div className="flex flex-row justify-evenly">
             <NavBar/>
