@@ -49,6 +49,6 @@ export const SidebarData = [
         title: 'Broadcast',
         path: '/broadcast',
         icon: <PiMicrophoneStage/>,
-        cName: 'nav-text text-black pl-9 pb-2 !mt-32 ml-1 mr-6 bg-[#79C2CD] rounded-full hover:bg-[#408796]'
+        cName: 'nav-text text-black pl-4 pb-2 !mt-40 ml-1 mr-4 bg-[#79C2CD] rounded-full hover:bg-[#408796]'
     } 
 ] 

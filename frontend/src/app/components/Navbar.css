@@ -10,17 +10,16 @@
 .nav-menu{
     background-color: #404040;
     border-radius: 25px;
-    width: 250px;
-    height: 55vh;
+    width: 210px;
+    height: 70vh;
     display: flex;
     justify-content: center;
-    top: 30vh;
-    bottom: 50px;
+    top: 20vh;
     left: 20px;
+    margin-top: 10%;
     transition: 850ms;
     justify-items: center;
     text-align: center;
-    /* position: fixed; */
 }
 
 .nav-menu a{
