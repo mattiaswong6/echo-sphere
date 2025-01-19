@@ -14,10 +14,10 @@ function NavBar() {
             {SidebarData.map((item, index) => {
               return(
                 <li key={index} className={item.cName + ' pt-2'}>
-                  <Link to={item.path}>
+                  <a href={item.path}>
                     {item.icon}
                     <span>{item.title}</span>
-                  </Link>
+                  </a>
                 </li>
               )
             })}
