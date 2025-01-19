@@ -1,0 +1,14 @@
+.auth-button {
+    width: 20%;
+    height: 50px;
+    border: #79C2CD;
+    border-radius: 17px;
+    border-style: solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-button:hover {
+    opacity: 80%;
+}

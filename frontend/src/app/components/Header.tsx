@@ -15,7 +15,7 @@ export default function Header() {
           />
       </Link>
       <SearchBar/>
-      <Link href="/">
+      <Link href="/account">
           <Image
             src="user-assets/default-profile.svg"
             alt="Profile Picture"
