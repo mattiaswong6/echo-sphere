@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import SearchBar from "./SearchBar"
-import logo from './echosphere.png'
+import logo from '../../public/echosphere.png'
 
 export default function Header() {
   return (

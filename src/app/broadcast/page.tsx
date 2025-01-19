@@ -1,7 +1,7 @@
 "use client"
 
-import Header from "../components/Header";
-import NavBar from "../components/NavBar";
+import Header from "../Header";
+import NavBar from "../NavBar";
 import {Routes, BrowserRouter as Router} from 'react-router-dom'
 import { useState } from 'react';
 import UserItem from './user-item';

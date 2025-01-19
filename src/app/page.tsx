@@ -1,11 +1,9 @@
 "use client"
 
-import Header from "./components/Header";
-import NavBar from "./components/NavBar";
-import {Routes, BrowserRouter as Router, Route} from 'react-router-dom'
-import Discover from './pages/Discover'
-import Broadcast from './pages/Broadcast'
-import StreamCard from "./components/StreamCard";
+import Header from "./Header";
+import NavBar from "./NavBar";
+import {BrowserRouter as Router} from 'react-router-dom'
+import StreamCard from "./StreamCard";
 
 export default function Home() {
   return (
@@ -67,10 +65,6 @@ export default function Home() {
             </div>
         </div>
 
-        <Routes>
-          <Route path='/discover' Component={Discover}/>
-          <Route path='/broadcast' Component={Broadcast}/>
-        </Routes>
       </Router>
     </div>
   );

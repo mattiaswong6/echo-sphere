@@ -2,8 +2,9 @@
 import { useEffect, useRef } from "react";
 import { Client, Constraints, LocalStream} from "ion-sdk-js";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
+import dynamic from 'next/dynamic';
 
-export default function Broadcast() {
+const Broadcast = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   //  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
   const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
@@ -43,3 +44,5 @@ export default function Broadcast() {
     </div>
   );
 }
+
+export default dynamic(() => Promise.resolve(Broadcast), { ssr: false });
