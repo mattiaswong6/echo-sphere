@@ -6,15 +6,10 @@ import { Configuration } from "ion-sdk-js/lib/client";
 import ChatWindow from "../ChatWindow";
 import StreamCard from "../StreamCard";
 
-
-
-
-
-
-
-
 export default function Listen({ name = "listener", streamId}: { name?: string, streamId: string }) {
-  const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
+  // wss server
+  const NEXT_PUBLIC_SFU_WS_URL = process.env.WS_SFU_SERVER
+
   const audioRef = useRef<HTMLAudioElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState("");
