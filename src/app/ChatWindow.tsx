@@ -6,6 +6,7 @@ type Message = {
   sender: string;
   color: string
 };
+
 function getRandomColor() {
   const letters = '0123456789ABCDEF';
   let color = '#';

@@ -14,7 +14,7 @@ type Message = {
   color: string;
 };
 
-export default function Broadcast({ name = "streamer" }: { name: string }) {
+export default function Broadcast({ name = "streamer", streamerId}: { name: string, streamerId: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
   // const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
@@ -37,7 +37,7 @@ export default function Broadcast({ name = "streamer" }: { name: string }) {
       const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
       const client = new Client(signal, config as Configuration);
       signal.onopen = async () => {
-        client.join("ion", uuidv4());
+        client.join("ion" + streamerId, uuidv4());
 
         const dataChannel = client.createDataChannel("chat");
         dataChannelRef.current = dataChannel;

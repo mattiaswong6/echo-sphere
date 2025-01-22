@@ -7,13 +7,13 @@ import ChatWindow from "../ChatWindow";
 import StreamCard from "../StreamCard";
 
 
-type Message = {
-  text: string;
-  sender: string;
-  color: string;
-};
 
-export default function View({ name = "viewer" }: { name: string }) {
+
+
+
+
+
+export default function Listen({ name = "listener", streamId}: { name?: string, streamId: string }) {
   const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
   const audioRef = useRef<HTMLAudioElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -32,7 +32,7 @@ export default function View({ name = "viewer" }: { name: string }) {
       };
       const signal = new IonSFUJSONRPCSignal(NEXT_PUBLIC_SFU_WS_URL);
       const client = new Client(signal, config as Configuration);
-      signal.onopen = () => client.join("ion", uuidv4());
+      signal.onopen = () => client.join("ion" + streamId, uuidv4());
 
       client.ondatachannel = (channelEvent) => {
         channelEvent.channel.onmessage = (event) => {
