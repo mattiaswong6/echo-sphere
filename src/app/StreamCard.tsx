@@ -22,6 +22,8 @@ export default function StreamCard(props:StreamCard) {
     }
 
   return (
+    <a href={"/listen/" + props.streamCreator}>
+
     <div className={"stream-card-container rounded-2xl flex justify-center bg-slate-800"}>
         <div className={"album-cover rounded-2xl flex"}>
             <img src={props.streamCover} alt="Astronaught" className="object-cover rounded-2xl hover:animate-pulse"></img>
@@ -50,5 +52,6 @@ export default function StreamCard(props:StreamCard) {
         </div>
         
     </div>
+    </a>
   )
 }
