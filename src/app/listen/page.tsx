@@ -2,29 +2,21 @@
 
 import Header from "../Header";
 import NavBar from "../NavBar";
-import {Routes, BrowserRouter as Router} from 'react-router-dom'
 import { useState } from 'react';
-import UserItem from '../broadcast/user-item';
+import View from "../listentest/page";
 import {
-  DndContext,
   DragEndEvent,
   KeyboardSensor,
   PointerSensor,
-  closestCenter,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
 import {
-  SortableContext,
   arrayMove,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import * as fa from "react-icons/fa";
-import ChatWindow from "../ChatWindow";
-import Broadcast from "../broadtest/page";
-import View from "../listentest/page";
+
 type User = {
   id: number;
   name: string;
@@ -79,11 +71,7 @@ const UserList = () => {
         <Header/>
       </div>
       <div className="">
-        <Router>
           <NavBar/>
-          <Routes>
-          </Routes>
-        </Router>
       </div>
       <div>
 

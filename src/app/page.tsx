@@ -2,7 +2,6 @@
 
 import Header from "./Header";
 import NavBar from "./NavBar";
-import {BrowserRouter as Router} from 'react-router-dom'
 import StreamCard from "./StreamCard";
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
       <div className="flex justify-center">
         <Header/>
       </div>
-      <Router>
         <div className="flex flex-row justify-evenly">
             <NavBar/>
             <div className="flex flex-col w-9/12 gap-y-4">
@@ -67,8 +65,6 @@ export default function Home() {
                 </div>
             </div>
         </div>
-
-      </Router>
     </div>
   );
 }

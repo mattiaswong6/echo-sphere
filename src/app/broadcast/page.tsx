@@ -2,7 +2,6 @@
 
 import Header from "../Header";
 import NavBar from "../NavBar";
-import {Routes, BrowserRouter as Router} from 'react-router-dom'
 import { useState } from 'react';
 import UserItem from './user-item';
 import {
@@ -22,8 +21,8 @@ import {
 } from '@dnd-kit/sortable';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import * as fa from "react-icons/fa";
-import ChatWindow from "../ChatWindow";
 import Broadcast from "../broadtest/page";
+
 type User = {
   id: number;
   name: string;
@@ -78,11 +77,7 @@ const UserList = () => {
         <Header/>
       </div>
       <div className="">
-        <Router>
-          <NavBar/>
-          <Routes>
-          </Routes>
-        </Router>
+        <NavBar/>
       </div>
       <div>
 

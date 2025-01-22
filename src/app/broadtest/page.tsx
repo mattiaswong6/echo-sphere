@@ -1,16 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Client, Constraints, LocalStream } from "ion-sdk-js";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 import { v4 as uuidv4 } from "uuid";
-import dynamic from "next/dynamic";
 import { Configuration } from "ion-sdk-js/lib/client";
 import ChatWindow from "../ChatWindow";
 import StreamCard from "../StreamCard";
 
+import { Constraints } from "ion-sdk-js";
+
 type Message = {
   text: string;
   sender: string;
+  color: string;
 };
 
 export default function Broadcast({ name = "streamer" }: { name: string }) {
@@ -24,6 +25,8 @@ export default function Broadcast({ name = "streamer" }: { name: string }) {
   const dataChannelRef = useRef<RTCDataChannel | null>(null);
   useEffect(() => {
     async function audioHelper() {
+      const LocalStream = await import("ion-sdk-js").then((module) => module.LocalStream);
+      const Client = await import("ion-sdk-js").then((module) => module.Client);
       const config = {
         iceServers: [
           {

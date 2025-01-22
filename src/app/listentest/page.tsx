@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Client, RemoteStream } from "ion-sdk-js";
 import { IonSFUJSONRPCSignal } from "ion-sdk-js/lib/signal/json-rpc-impl";
 import { v4 as uuidv4 } from "uuid";
 import { Configuration } from "ion-sdk-js/lib/client";
@@ -13,6 +12,7 @@ type Message = {
   sender: string;
   color: string;
 };
+
 export default function View({ name = "viewer" }: { name: string }) {
   const NEXT_PUBLIC_SFU_WS_URL = "wss://adityaadiraju.com:7000/ws";
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -22,6 +22,7 @@ export default function View({ name = "viewer" }: { name: string }) {
 
   useEffect(() => {
     const startViewing = async () => {
+      const Client = await import("ion-sdk-js").then((module) => module.Client);
       const config = {
         iceServers: [
           {
@@ -43,7 +44,9 @@ export default function View({ name = "viewer" }: { name: string }) {
         channelEvent.channel.onclose = () => console.log("Data channel closed");
       };
 
-      client.ontrack = (track: MediaStreamTrack, stream: RemoteStream) => {
+      
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      client.ontrack = (track: any, stream: any) => {
         if (audioRef.current) {
           audioRef.current.srcObject = stream;
           audioRef.current.autoplay = true;
