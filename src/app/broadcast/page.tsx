@@ -75,6 +75,7 @@ export default function Home() {
                   streamCreator="MindMattersPod"
                   streamPfp="/user-assets/colourful.jpg"
                   streamTags={["mental-health", "education"]}
+                  broadcast
                 />
                 <StreamCard
                   streamCover="/user-assets/ubc-cube.jpg"
@@ -90,6 +91,7 @@ export default function Home() {
                   streamCreator="novaskye"
                   streamPfp="/user-assets/record.jpg"
                   streamTags={["music", "r&b", "poc-artist"]}
+                  broadcast
                 />
                 <StreamCard
                   streamCover="/user-assets/religious.jpg"
@@ -97,6 +99,7 @@ export default function Home() {
                   streamCreator="EverythingEverywheretv"
                   streamPfp="/user-assets/prayer.jpg"
                   streamTags={["religion", "podcast", "spiritual"]}
+                  broadcast
                 />
                 <StreamCard
                   streamCover="/user-assets/balatro.jpg"
@@ -104,6 +107,7 @@ export default function Home() {
                   streamCreator="danTDM"
                   streamPfp="/user-assets/danTDM.jpeg"
                   streamTags={["gaming", "podcast", "popular"]}
+                  broadcast
                 />
                 <StreamCard
                     streamCover="/user-assets/shroom-astronaught.jpg"
@@ -111,6 +115,7 @@ export default function Home() {
                     streamCreator="yungchickenwing"
                     streamPfp="/user-assets/chicken.jpg"
                     streamTags={["music", "new-artist"]}
+                  broadcast
                   />
                 </div>
             </div>
