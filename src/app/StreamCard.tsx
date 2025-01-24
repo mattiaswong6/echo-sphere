@@ -7,6 +7,7 @@ interface StreamCard {
     streamCreator: string;
     streamPfp: string;
     streamTags: string[];
+    broadcast?: boolean;
 }
 
 export default function streamCard(props:StreamCard) {
@@ -22,7 +23,7 @@ export default function streamCard(props:StreamCard) {
     }
 
   return (
-    <a href={"/listen/" + props.streamCreator}>
+    <a href={(props.broadcast ? "/broadcast/" : "/listen/") + props.streamCreator}>
 
     <div className={"stream-card-container rounded-2xl flex justify-center bg-slate-800"}>
         <div className={"album-cover rounded-2xl flex"}>
