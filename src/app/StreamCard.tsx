@@ -9,7 +9,7 @@ interface StreamCard {
     streamTags: string[];
 }
 
-export default function StreamCard(props:StreamCard) {
+export default function streamCard(props:StreamCard) {
     const tooManyTags = props.streamTags.length > 3;
     const numExtraTags = props.streamTags.length - 3;
 

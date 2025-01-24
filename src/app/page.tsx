@@ -1,5 +1,3 @@
-"use client"
-
 import Header from "./Header";
 import NavBar from "./NavBar";
 import StreamCard from "./StreamCard";
@@ -17,7 +15,6 @@ export default function Home() {
                 Listen Now
               </h1>
               <div className="flex flex-row flex-wrap justify-evenly w-full gap-y-8">
-                <a href="/listen">
                 <StreamCard
                   streamCover="user-assets/hand-reach.jpg"
                   streamName="Mind Matters (ep. 21)"
@@ -25,26 +22,25 @@ export default function Home() {
                   streamPfp="user-assets/colourful.jpg"
                   streamTags={["mental-health", "education"]}
                 />
-                </a>
 
                 <StreamCard
                   streamCover="user-assets/ubc-cube.jpg"
                   streamName="CPSC 213 Week 3 Discussion"
-                  streamCreator="Brainiac Walter"
+                  streamCreator="BrainiacWalter"
                   streamPfp="user-assets/default-profile.svg"
                   streamTags={["education", "ubc", "popular"]}
                 />
                 <StreamCard
                   streamCover="user-assets/soul-artist.jpg"
                   streamName="new mix 01/18"
-                  streamCreator="nova skye"
+                  streamCreator="novaskye"
                   streamPfp="user-assets/record.jpg"
                   streamTags={["music", "r&b", "poc-artist"]}
                 />
                 <StreamCard
                   streamCover="user-assets/religious.jpg"
                   streamName="religious existentialism"
-                  streamCreator="EverythingEverywhere.tv"
+                  streamCreator="EverythingEverywheretv"
                   streamPfp="user-assets/prayer.jpg"
                   streamTags={["religion", "podcast", "spiritual"]}
                 />
@@ -58,7 +54,7 @@ export default function Home() {
                 <StreamCard
                     streamCover="user-assets/shroom-astronaught.jpg"
                     streamName="psychedelic rap"
-                    streamCreator="yung chicken wing"
+                    streamCreator="yungchickenwing"
                     streamPfp="user-assets/chicken.jpg"
                     streamTags={["music", "new-artist"]}
                   />

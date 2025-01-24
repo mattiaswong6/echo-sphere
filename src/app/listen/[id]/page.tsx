@@ -1,8 +1,8 @@
-"use client"
 
 import Header from "../../Header";
 import NavBar from "../../NavBar";
 import Listen from "../Listen";
+
 
 export default async function ListenView({params}: {params: Promise<{id: string}>}) {
   const streamId = (await params).id;
