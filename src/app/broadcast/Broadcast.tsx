@@ -69,7 +69,7 @@ const streams: Stream[] = [{
 export default function Broadcast({ name = "streamer", streamerId}: { name: string, streamerId: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   // wss server
-  const NEXT_PUBLIC_SFU_WS_URL = process.env.WS_SFU_SERVER
+  const NEXT_PUBLIC_SFU_WS_URL = process.env.NEXT_PUBLIC_SFU_WS_URL
   // const NEXT_PUBLIC_SFU_WS_URL = "ws://localhost:7000/ws";
 
   const [messages, setMessages] = useState<Message[]>([]);

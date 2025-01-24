@@ -60,7 +60,7 @@ const streams: Stream[] = [{
 
 export default function Listen({ name = "listener", streamId}: { name?: string, streamId: string }) {
   // wss server
-  const NEXT_PUBLIC_SFU_WS_URL = process.env.WS_SFU_SERVER
+  const NEXT_PUBLIC_SFU_WS_URL = process.env.NEXT_PUBLIC_SFU_WS_URL
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
