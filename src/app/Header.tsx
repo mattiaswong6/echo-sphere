@@ -17,7 +17,7 @@ export default function Header() {
       <SearchBar/>
       <Link href="/">
           <Image
-            src="user-assets/default-profile.svg"
+            src="/user-assets/default-profile.svg"
             alt="Profile Picture"
             width={50}
             height={50}
