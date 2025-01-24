@@ -126,7 +126,7 @@ export default function Broadcast({ name = "streamer", streamerId}: { name: stri
     };
   }, []);
 
-  let stream = streams.find((e) => e.streamCreator === streamId);
+  let stream = streams.find((e) => e.streamCreator === streamerId);
   stream = stream ? stream : streams[0] 
 
   return (
